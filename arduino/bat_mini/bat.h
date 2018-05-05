@@ -14,7 +14,7 @@
 #define BAT_H
 
 #include <Arduino.h>
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
 #include <APA102.h>
 
 #define VERSION "0.2"
@@ -34,7 +34,7 @@
 // *** chips that support the hardware serial, just
 // *** comment this line.
 // ***
-SoftwareSerial Serial(RX, TX);
+//SoftwareSerial Serial(RX, TX);
 
 
 

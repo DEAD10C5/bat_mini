@@ -1,6 +1,7 @@
 http://highlowtech.org/?p=1695
 
 http://www.batsocks.co.uk/readme/isp_headers.htm
+http://electronut.in/serial-communications-with-the-attiny84/
 
 
 https://www.tindie.com/products/ICStation/128x32-i2c-iic-serial-white-oled-display9933/
@@ -32,3 +33,4 @@ https://www.tindie.com/products/ICStation/128x32-i2c-iic-serial-white-oled-displ
 http://www.ernstc.dk/arduino/tinycom.html
 
 
+https://www.adafruit.com/product/954
