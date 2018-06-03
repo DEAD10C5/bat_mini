@@ -1,4 +1,5 @@
-/*
+/*!
+ * @file bat_mini.ino
     ____  _____      _    ____    _  ___     ____ ____
    |  _ \| ____|_   / \  |  _ \ _/ |/ _ \ _ / ___| ___|
    | | | |  _| (_) / _ \ | | | (_) | | | (_) |   |___ \
@@ -7,12 +8,14 @@
 
 
    Author : e @p0lr_ @mzbat @theDevilsVoice @dead10c5
-   Date   : April 16, 2018
-   Version: 0.1
+   Date   : May 29, 2018
+   Version: 0.3
 */
 
 #include "bat.h"
-#include <APA102.h>
+//#include <APA102.h>
+
+MyBat mybat;
 
 // Create an object for writing to the LED strip.
 APA102<dataPin, clockPin> ledStrip;
