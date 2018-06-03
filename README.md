@@ -1,12 +1,11 @@
-http://highlowtech.org/?p=1695
+## Useful Links
 
-http://www.batsocks.co.uk/readme/isp_headers.htm
-http://electronut.in/serial-communications-with-the-attiny84/
+[Set up the programming environment](http://highlowtech.org/?p=1695)
+[About ISP headers](http://www.batsocks.co.uk/readme/isp_headers.htm)
+[Serial comm setup](http://electronut.in/serial-communications-with-the-attiny84/)
+[Serial cable source](https://www.tindie.com/products/ICStation/128x32-i2c-iic-serial-white-oled-display9933/)
 
-
-https://www.tindie.com/products/ICStation/128x32-i2c-iic-serial-white-oled-display9933/
-
-// ATMEL ATTINY84 / ARDUINO
+## ATMEL ATTINY84 / ARDUINO pinout
 
 //
 

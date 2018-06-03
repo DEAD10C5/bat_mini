@@ -1,14 +1,15 @@
-/*
- *  ____  _____      _    ____    _  ___     ____ ____  
- * |  _ \| ____|_   / \  |  _ \ _/ |/ _ \ _ / ___| ___| 
- * | | | |  _| (_) / _ \ | | | (_) | | | (_) |   |___ \ 
- * | |_| | |___ _ / ___ \| |_| |_| | |_| |_| |___ ___) |
- * |____/|_____(_)_/   \_\____/(_)_|\___/(_)\____|____/ 
- *                                                    
- *                                                    
- * Author : e @p0lr_ @mzbat @theDevilsVoice @dead10c5
- * Date   : April 16, 2018
- * Version: 0.1
+/*!
+ * @file bat.cpp
+    ____  _____      _    ____    _  ___     ____ ____
+   |  _ \| ____|_   / \  |  _ \ _/ |/ _ \ _ / ___| ___|
+   | | | |  _| (_) / _ \ | | | (_) | | | (_) |   |___ \
+   | |_| | |___ _ / ___ \| |_| |_| | |_| |_| |___ ___) |
+   |____/|_____(_)_/   \_\____/(_)_|\___/(_)\____|____/
+
+
+   Author : e @p0lr_ @mzbat @theDevilsVoice @dead10c5
+   Date   : May 29, 2018
+   Version: 0.3
  * 
  * https://www.arduino.cc/en/Tutorial/ArduinoISP
  * Board: Attiny 24/44/84
@@ -23,7 +24,7 @@
 /*
  * Pulse the Internal LED
  */
-void led_breath() {
+void MyBat::led_breath() {
      //ramp increasing intensity, Inhalation: 
   for (int i=1;i<BRIGHT;i++){
     digitalWrite(left_eye, LOW);
@@ -37,7 +38,7 @@ void led_breath() {
 }
 
 
-void led_half_breath() {
+void MyBat::led_half_breath() {
   //ramp decreasing intensity, Exhalation (half time):
   for (int i=BRIGHT-1;i>0;i--){
     digitalWrite(left_eye, LOW);          // turn the LED on.
@@ -56,7 +57,7 @@ void led_half_breath() {
  * h is hue, as a number between 0 and 360.
  * s is the saturation, as a number between 0 and 255.
  * v is the value, as a number between 0 and 255. */
-rgb_color hsvToRgb(uint16_t h, uint8_t s, uint8_t v)
+rgb_color MyBat::hsvToRgb(uint16_t h, uint8_t s, uint8_t v)
 {
     uint8_t f = (h % 60) * 255 / 60;
     uint8_t p = (255 - s) * (uint16_t)v / 255;
@@ -73,4 +74,3 @@ rgb_color hsvToRgb(uint16_t h, uint8_t s, uint8_t v)
     }
     return rgb_color(r, g, b);
 }
-

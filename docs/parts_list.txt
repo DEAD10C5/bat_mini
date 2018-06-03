@@ -1,23 +1,24 @@
 Partlist
 
-Exported from bat_mini1.brd at 4/3/18 9:11 PM
+Exported from bat_mini4.brd at 5/18/18 10:08 PM
 
-EAGLE Version 8.7.1 Copyright (c) 1988-2018 Autodesk, Inc.
+EAGLE Version 9.0.1 Copyright (c) 1988-2018 Autodesk, Inc.
 
 Assembly variant: 
 
 Part     Value          Package             Library                       Position (mm)         Orientation
 
-.        .              CHIP-LED0805        led                           (47.0625 17.5)        R0
-..       ..             CHIP-LED0805        led                           (41.25 16.9375)       R0
-DEBUG                   1X02                pinhead                       (51.0625 71.5625)     MR0
-EYE1     APA102         APA102-2020         pimoroni-optoelectronics      (62 78.1875)          R0
-EYE2     APA102         APA102-2020         pimoroni-optoelectronics      (76.8125 50)          R0
-ISP      .              2X03                pinhead                       (32.0625 62.1875)     MR0
-POWER    .              1X02                pinhead                       (33.25 71.625)        MR0
-U$4      APA102         APA102-2020         pimoroni-optoelectronics      (62 21)               R0
-U$5      APA102         APA102-2020         pimoroni-optoelectronics      (45.0625 44.4375)     R0
-U$6      APA102         APA102-2020         pimoroni-optoelectronics      (21.9375 21.5)        R0
-U$7      APA102         APA102-2020         pimoroni-optoelectronics      (8.5625 49.9375)      R0
-U$8      APA102         APA102-2020         pimoroni-optoelectronics      (21 76.875)           R0
-U1       ATTINY84-20SSU SOIC127P600X175-14N Atmel_By_element14_Batch_1-00 (54.835 59.64)        R0
+.        .              CHIP-LED0805        led                           (47.0725 17.485)      R0
+..       ..             CHIP-LED0805        led                           (41.26 16.9225)       R0
+...      ATTINY84-20SSU SOIC127P600X175-14N Atmel_By_element14_Batch_1-00 (54.845 59.625)       R0
+BT1                     BATTCON_20MM_4LEGS  SF_Batteries                  (24.375 38.5625)      MR0
+BT2                     BATTCON_20MM_4LEGS  SF_Batteries                  (63.1875 37.25)       MR0
+DEBUG                   1X04                pinhead                       (51.0725 71.5475)     MR0
+ISP      .              2X03                pinhead                       (32.0725 62.1725)     MR0
+ONE      APA102         APA102-2020         pimoroni-optoelectronics      (62.01 78.1725)       R0
+THREE    APA102         APA102-2020         pimoroni-optoelectronics      (62.01 20.985)        R0
+TWO      APA102         APA102-2020         pimoroni-optoelectronics      (76.8225 49.985)      R0
+U$5      APA102         APA102-2020         pimoroni-optoelectronics      (46.5925 33.7825)     R0
+U$6      APA102         APA102-2020         pimoroni-optoelectronics      (21.9475 21.485)      R0
+U$7      APA102         APA102-2020         pimoroni-optoelectronics      (8.5725 49.9225)      R0
+U$8      APA102         APA102-2020         pimoroni-optoelectronics      (21.01 76.86)         R0
