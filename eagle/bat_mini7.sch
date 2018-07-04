@@ -7825,10 +7825,10 @@ Datasheet: https://cdn-shop.adafruit.com/product-files/2343/APA102C.pdf</descrip
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="P+3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="SUPPLY9" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
-<part name="S1" library="switch-omron" library_urn="urn:adsk.eagle:library:377" deviceset="10-XX" device="" package3d_urn="urn:adsk.eagle:package:27496/1"/>
+<part name="S1" library="switch-omron" library_urn="urn:adsk.eagle:library:377" deviceset="10-XX" device="" package3d_urn="urn:adsk.eagle:package:27496/1" value="omron"/>
 <part name="SUPPLY11" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="R1" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:26059/1" value="470Ω"/>
-<part name="SERIAL" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2"/>
+<part name="SERIAL" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2" value="pinhead 1x02"/>
 <part name="P+2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="U$1" library="jos-ph" deviceset="APA102" device="5050"/>
 <part name="U$2" library="jos-ph" deviceset="APA102" device="5050"/>
@@ -7849,8 +7849,8 @@ Datasheet: https://cdn-shop.adafruit.com/product-files/2343/APA102C.pdf</descrip
 <part name="P+9" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="P+10" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="RIGHT_EYE" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="CHIP-LED0805" package3d_urn="urn:adsk.eagle:package:15818/2" value="0805"/>
-<part name="BT1" library="SF_Batteries" deviceset="BATTERY" device="-20MM_SMD_4LEGS"/>
-<part name="BATT" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2"/>
+<part name="BT1" library="SF_Batteries" deviceset="BATTERY" device="-20MM_SMD_4LEGS" value="CR2032"/>
+<part name="BATT" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X2" device="" package3d_urn="urn:adsk.eagle:package:22435/2" value="BATT"/>
 <part name="SUPPLY6" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="P+7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 </parts>
@@ -7894,7 +7894,7 @@ Datasheet: https://cdn-shop.adafruit.com/product-files/2343/APA102C.pdf</descrip
 <instance part="P+8" gate="VCC" x="200.66" y="109.22"/>
 <instance part="P+9" gate="VCC" x="177.8" y="109.22"/>
 <instance part="P+10" gate="VCC" x="154.94" y="109.22"/>
-<instance part="RIGHT_EYE" gate="G$1" x="71.12" y="121.92" rot="R90"/>
+<instance part="RIGHT_EYE" gate="G$1" x="55.88" y="134.62" rot="R90"/>
 <instance part="BT1" gate="G$1" x="124.46" y="152.4" rot="MR180"/>
 <instance part="BATT" gate="G$1" x="170.18" y="152.4"/>
 <instance part="SUPPLY6" gate="GND" x="160.02" y="142.24"/>
@@ -7965,9 +7965,9 @@ Datasheet: https://cdn-shop.adafruit.com/product-files/2343/APA102C.pdf</descrip
 <segment>
 <pinref part="..." gate="A" pin="PA7"/>
 <wire x1="76.2" y1="50.8" x2="81.28" y2="50.8" width="0.1524" layer="91"/>
-<wire x1="81.28" y1="50.8" x2="81.28" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="81.28" y1="50.8" x2="81.28" y2="134.62" width="0.1524" layer="91"/>
 <pinref part="RIGHT_EYE" gate="G$1" pin="C"/>
-<wire x1="76.2" y1="121.92" x2="81.28" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="134.62" x2="81.28" y2="134.62" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -7979,6 +7979,11 @@ Datasheet: https://cdn-shop.adafruit.com/product-files/2343/APA102C.pdf</descrip
 <wire x1="53.34" y1="111.76" x2="40.64" y2="111.76" width="0.1524" layer="91"/>
 <junction x="40.64" y="111.76"/>
 <pinref part="SUPPLY1" gate="GND" pin="GND"/>
+<wire x1="40.64" y1="121.92" x2="40.64" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="134.62" x2="53.34" y2="134.62" width="0.1524" layer="91"/>
+<junction x="40.64" y="121.92"/>
+<pinref part="RIGHT_EYE" gate="G$1" pin="A"/>
+<junction x="53.34" y="134.62"/>
 </segment>
 <segment>
 <wire x1="27.94" y1="63.5" x2="35.56" y2="63.5" width="0.1524" layer="91"/>
@@ -8198,8 +8203,12 @@ Datasheet: https://cdn-shop.adafruit.com/product-files/2343/APA102C.pdf</descrip
 <net name="N$2" class="0">
 <segment>
 <pinref part="LEFT_EYE" gate="G$1" pin="C"/>
-<pinref part="RIGHT_EYE" gate="G$1" pin="A"/>
-<wire x1="68.58" y1="121.92" x2="60.96" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="121.92" x2="68.58" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="121.92" x2="68.58" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="99.06" x2="5.08" y2="99.06" width="0.1524" layer="91"/>
+<wire x1="5.08" y1="99.06" x2="5.08" y2="58.42" width="0.1524" layer="91"/>
+<pinref part="..." gate="A" pin="PB2"/>
+<wire x1="5.08" y1="58.42" x2="40.64" y2="58.42" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
