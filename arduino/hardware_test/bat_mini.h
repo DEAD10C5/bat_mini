@@ -33,18 +33,24 @@
 #define BAT_H
 #define VERSION "0.1"
 
+// Defines for LED pulse code
+#define BRIGHT    31    //max led intensity (1-500)
+#define INHALE    1250    //Inhalation time in milliseconds.
+#define PULSE     INHALE*1000/BRIGHT
+#define REST      100    //Rest Between Inhalations.
+
 #include <Arduino.h>
 #include <APA102.h>
 
+// pins'n'stuff
 const uint8_t dataPin    = PA2;
 const uint8_t clockPin   = PA3;
-const uint8_t heart      = 0;
-const uint8_t eyes       = 7;
-const int button         = 1;
+const uint8_t heart      = PA7;
+const uint8_t left_eye   = PB2;
+const uint8_t right_eye  = 0;
+const uint8_t button     = 1;
 const uint16_t ledCount  = 6;
-const uint8_t brightness = 1;  // Set the brightness to use (the maximum is 31).
-
-
+const uint8_t brightness = 10;
 
 
 class MyBat {
@@ -52,9 +58,7 @@ class MyBat {
     int buttonState;         // variable for reading the pushbutton status
     uint8_t led_pattern_cur;
     
-    void make_led_dark(uint8_t);
-
+    rgb_color hsvToRgb(uint16_t, uint8_t, uint8_t);
 };
-
 
 #endif

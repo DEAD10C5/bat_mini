@@ -15,14 +15,13 @@
 
 MyBat mybat;
 
-
-
 APA102<dataPin, clockPin> ledStrip;
 
 rgb_color colors[ledCount];
 
 void setup() {
-  pinMode(eyes, OUTPUT);
+  pinMode(left_eye, OUTPUT);
+  pinMode(right_eye, OUTPUT);
   pinMode(heart, OUTPUT);
 
   pinMode(button, INPUT);
@@ -30,56 +29,89 @@ void setup() {
   mybat.led_pattern_cur = 1;
 }
 
-/* Converts a color from HSV to RGB.
-   h is hue, as a number between 0 and 360.
-   s is the saturation, as a number between 0 and 255.
-   v is the value, as a number between 0 and 255. */
-rgb_color hsvToRgb(uint16_t h, uint8_t s, uint8_t v)
-{
-  uint8_t f = (h % 60) * 255 / 60;
-  uint8_t p = (255 - s) * (uint16_t)v / 255;
-  uint8_t q = (255 - f * (uint16_t)s / 255) * (uint16_t)v / 255;
-  uint8_t t = (255 - (255 - f) * (uint16_t)s / 255) * (uint16_t)v / 255;
-  uint8_t r = 0, g = 0, b = 0;
-  switch ((h / 60) % 6) {
-    case 0: r = v; g = t; b = p; break;
-    case 1: r = q; g = v; b = p; break;
-    case 2: r = p; g = v; b = t; break;
-    case 3: r = p; g = q; b = v; break;
-    case 4: r = t; g = p; b = v; break;
-    case 5: r = v; g = p; b = q; break;
+void loop() {
+  int my_brightness = 1;  // Set the brightness to use
+  int step = 1;
+  analogWrite(heart, my_brightness);
+  my_brightness = my_brightness + step;
+  if (my_brightness >= 255)
+    my_brightness = 0;
+
+  if (mybat.buttonState == LOW) {
+
+    switch (mybat.led_pattern_cur) {
+      case 1:
+        rainbow();
+        darkness();
+        mybat.led_pattern_cur++;
+        break;
+      case 2:
+        chase();
+        darkness();
+        mybat.led_pattern_cur++;
+        break;
+      case 3:
+        derp();
+        darkness();
+        mybat.led_pattern_cur = 1; // button push takes us back to the first pattern
+        break;
+      default:
+        break;
+    }
   }
-  return rgb_color(r, g, b);
 }
 
 void rainbow() {
-mybat.buttonState = HIGH;
-delay(100);
-  while(mybat.buttonState != LOW) {
+
+  mybat.buttonState = HIGH;
+  delay(100);
+  while (mybat.buttonState != LOW) {
 
     uint8_t time = millis() >> 4;
     for (uint16_t i = 0; i < ledCount; i++) {
       uint8_t p = time - i * 8;
-      colors[i] = hsvToRgb((uint32_t)p * 359 / 256, 255, 255);
+      colors[i] = mybat.hsvToRgb((uint32_t)p * 359 / 256, 255, 255);
     }
     ledStrip.write(colors, ledCount, brightness);
     delay(10);
 
     mybat.buttonState = digitalRead(1);
-  } 
-
-  // turn off the rgb leds
-  for (uint16_t i = 0; i < ledCount; i++) {
-    colors[i] = hsvToRgb(0, 0, 0);
   }
-  ledStrip.write(colors, ledCount, 0);
+}
+
+void chase() {
+  mybat.buttonState = HIGH;
+  delay(100);
+
+  digitalWrite(left_eye, HIGH);
+  digitalWrite(right_eye, HIGH);
+  digitalWrite(heart, HIGH);
+
+  while (mybat.buttonState != LOW) {
+    for (uint16_t i = 0; i < ledCount; i++) {
+      for (uint16_t j = 0; j < ledCount; j++) {
+        if (i != j) {
+          colors[i] = mybat.hsvToRgb(0, 0, 0);
+        } else {
+          colors[i] = mybat.hsvToRgb(240, 255, 255);
+        }
+      }
+      ledStrip.write(colors, ledCount, 0);
+      delay(250);
+    }
+    mybat.buttonState = digitalRead(1);
+  }
 }
 
 void derp() {
-  do {
-    digitalWrite(eyes, HIGH);
+  mybat.buttonState = HIGH;
+  delay(100);
+  while (mybat.buttonState != LOW) {
+    digitalWrite(right_eye, HIGH);
+    digitalWrite(left_eye, HIGH);
     delay(500);
-    digitalWrite(eyes, LOW);
+    digitalWrite(right_eye, LOW);
+    digitalWrite(left_eye, LOW);
     delay(500);
 
     digitalWrite(heart, HIGH);
@@ -87,30 +119,50 @@ void derp() {
     digitalWrite(heart, LOW);
     delay(500);
     mybat.buttonState = digitalRead(1);
-  } while (mybat.buttonState != HIGH);
-}
-
-void loop() {
-
-
-  mybat.buttonState = digitalRead(1);
-
-  if (mybat.buttonState == LOW) {
-
-    switch (mybat.led_pattern_cur) {
-      case 1:
-        rainbow();
-        mybat.led_pattern_cur++;
-        break;
-      case 2:
-        derp();
-        mybat.led_pattern_cur = 1;
-        break;
-      default:
-        break;
-    }
-
   }
 
+}
+
+void led_half_breath() {
+  //ramp decreasing intensity, Exhalation (half time):
+  for (int i = BRIGHT - 1; i > 0; i--) {
+    digitalWrite(heart, LOW);          // turn the LED on.
+    //digitalWrite(right_eye, LOW);
+    delayMicroseconds(i * 10);        // wait
+    digitalWrite(heart, HIGH);         // turn the LED off.
+    //digitalWrite(right_eye, HIGH);
+    delayMicroseconds(PULSE - i * 10); // wait
+    i--;
+    delay(0);                        //to prevent watchdog firing.
+  }
+  delay(REST);                       //take a rest...
+}
+
+/*
+   Pulse the Internal LED
+*/
+void led_breath() {
+  //ramp increasing intensity, Inhalation:
+  for (int i = 1; i < BRIGHT; i++) {
+    digitalWrite(left_eye, HIGH);         // turn the LED on.
+    digitalWrite(right_eye, HIGH);
+    delayMicroseconds(i * 10);       // wait
+    digitalWrite(left_eye, LOW);         // turn the LED off.
+    digitalWrite(right_eye, LOW);
+    delayMicroseconds(PULSE - i * 10); // wait
+    delay(0);                        //to prevent watchdog firing.
+  }
+}
+
+void darkness() {
+  // turn off the rgb leds
+  for (uint16_t i = 0; i < ledCount; i++) {
+    colors[i] = mybat.hsvToRgb(0, 0, 0);
+  }
+  ledStrip.write(colors, ledCount, 0);
+
+  digitalWrite(left_eye, LOW);
+  digitalWrite(right_eye, LOW);
+  digitalWrite(heart, LOW);
 }
 

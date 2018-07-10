@@ -8214,6 +8214,11 @@ Datasheet: https://cdn-shop.adafruit.com/product-files/2343/APA102C.pdf</descrip
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="104,1,129.54,152.4,BT1,-,GND,,,"/>
+<approved hash="104,1,119.38,152.4,BT1,+,VCC,,,"/>
+<approved hash="113,1,104.036,92.606,FRAME1,,,,,"/>
+</errors>
 </schematic>
 </drawing>
 <compatibility>
