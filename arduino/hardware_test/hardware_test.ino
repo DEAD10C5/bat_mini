@@ -8,8 +8,8 @@
 
 
    Author : @dead10c5 @p0lr_ @mzbat @theDevilsVoice
-   Date   : July 4, 2018
-   Version: 0.1
+   Date   : July 9, 2018
+   Version: 0.2
 */
 #include "bat_mini.h"
 

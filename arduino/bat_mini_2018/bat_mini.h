@@ -8,11 +8,8 @@
 
 
    Author : @p0lr_ @mzbat @theDevilsVoice @dead10c5
-   Date   : July 4, 2018
-   Version: 0.1
-
-
-
+   Date   : August 2, 2018
+   Version: 0.3
 
 
                     ATMEL ATTINY84 / ARDUINO
@@ -27,30 +24,39 @@
     PWM        (D  4)  PA6  7|    |8   PA5  (D  5)        PWM
                              +----+
 
+IDE Attiny84 Physical Pin
+  0      PA0           13
+  1      PA1           12
+  2      PA2           11
+  3      PA3           10
+  4      PA4            9
+  5      PA5            8
+  6      PA6            7
+  7      PA7            6
+  8      PB2            5
+  9      PB1            3
+ 10      PB0            2
 
 */
 #ifndef BAT_H
 #define BAT_H
-#define VERSION "0.1"
+#define VERSION "0.3"
 
-// Defines for LED pulse code
-#define BRIGHT    31    //max led intensity (1-500)
-#define INHALE    1250    //Inhalation time in milliseconds.
-#define PULSE     INHALE*1000/BRIGHT
-#define REST      100    //Rest Between Inhalations.
+
+#define LEDBLINK_MS     1000  // Blink rate (in milliseconds)
 
 #include <Arduino.h>
 #include <APA102.h>
 
 // pins'n'stuff
-const uint8_t dataPin    = PA2;
-const uint8_t clockPin   = PA3;
-const uint8_t heart      = PA7;
-const uint8_t left_eye   = 8;
-const uint8_t right_eye  = 0;
-const uint8_t button     = 1;
-const uint16_t ledCount  = 6;
-const uint8_t brightness = 10;
+const uint8_t  DATA_PIN   = PA2;
+const uint8_t  CLOCK_PIN  = PA3;
+const uint8_t  RIGHT_EYE  = 7;
+const uint8_t  LEFT_EYE   = 8;
+const uint8_t  HEART      = 0;
+const uint8_t  BUTTON     = 1;
+const uint16_t LED_COUNT  = 6;
+const uint8_t  BRIGHTNESS = 1;
 
 
 class MyBat {

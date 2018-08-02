@@ -13,8 +13,8 @@
 */
 
 #include "bat.h"
-//#include <APA102.h>
 
+// instantiate bat object
 MyBat mybat;
 
 // Create an object for writing to the LED strip.
@@ -23,71 +23,40 @@ APA102<dataPin, clockPin> ledStrip;
 // Create a buffer for holding the colors (3 bytes per color).
 rgb_color colors[ledCount];
 
-
 // the setup routine runs once when you press reset:
 void setup() {
   // initialize the digital pin as an output.
   pinMode(left_eye, OUTPUT);
   pinMode(right_eye, OUTPUT);
+  pinMode(heart, OUTPUT);
 }
 
 // the loop routine runs over and over again forever:
 void loop() {
 
-  
-  digitalWrite(left_eye, HIGH);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(right_eye, LOW);
-  delay(50);               // wait for a second
-  digitalWrite(left_eye, LOW);    // turn the LED off by making the voltage LOW
-  digitalWrite(right_eye, HIGH);
-  delay(50);               // wait for a second
-  
+    if (mybat.button_state == LOW) {
 
-  for(uint16_t i = 0; i < ledCount; i++)
-  {
-    
-    if (i%2 == 0) {
-      //uint8_t x = time - i * 8;
-      colors[i].red = 0;
-      colors[i].green = 0;
-      colors[i].blue = 255;
-    } else {
-      colors[i].red = 0;
-      colors[i].green = 255;
-      colors[i].blue = 0;
+    switch (mybat.led_pattern_cur) {
+      case 1:
+        rainbow();
+        darkness();
+        mybat.led_pattern_cur++;
+        break;
+      case 2:
+        chase();
+        darkness();
+        mybat.led_pattern_cur++;
+        break;
+      case 3:
+        derp();
+        darkness();
+        mybat.led_pattern_cur = 1; // button push takes us back to the first pattern
+        break;
+      default:
+        break;
     }
-    
-  }  
-  ledStrip.write(colors, ledCount, 10);
-  delay(200);
-  
-  for(uint16_t i = 0; i < ledCount; i++)
-    if (i%2 != 0) {
-      //uint8_t x = time - i * 8;
-      colors[i].red = 0;
-      colors[i].green = 0;
-      colors[i].blue = 255;
-    } else {
-      colors[i].red = 0;
-      colors[i].green = 255;
-      colors[i].blue = 0;
-    }
-  ledStrip.write(colors, ledCount, 5);
-  delay(200);
-
-  /*
-  // rainbow
-  uint8_t time = millis() >> 4;
-  for(uint16_t i = 0; i < ledCount; i++) {
-    uint8_t p = time - i * 8;
-    colors[i] = hsvToRgb((uint32_t)p * 359 / 256, 255, 255);
   }
-  ledStrip.write(colors, ledCount, brightness);
-  delay(10);
-  */
-  
 
-  //led_half_breath();
 }
 
 

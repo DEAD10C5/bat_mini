@@ -76,15 +76,24 @@ const uint8_t brightness = 1;
 const uint16_t minPower  = 1;
 const uint16_t maxPower  = 255 * 31;
 const float multiplier   = pow(maxPower / minPower, 1.0 / (ledCount - 1));
-const uint8_t  dataPin    = 10;
-const uint8_t clockPin   = 11;
-const uint8_t left_eye   = 6;
-const uint8_t right_eye  = 12;
+const uint8_t dataPin    = PA2;
+const uint8_t clockPin   = PA3;
+const uint8_t heart      = PA7;
+const uint8_t left_eye   = PB2;
+const uint8_t right_eye  = 0;
 
 class MyBat {
   public:
-    void led_breath();
-    void led_half_breath();
+    uint8_t _button_state;         // variable for reading the pushbutton status
+    uint8_t _led_pattern_cur;
+
+    void ledBreath();
+    void ledHalfBreath();
+    void bringDarkness();
+
+    uint8_t getButtonState();
+    void setButtonState(uint8_t);
+    
     rgb_color hsvToRgb(uint16_t, uint8_t, uint8_t);
 };
 

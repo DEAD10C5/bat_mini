@@ -1,5 +1,5 @@
 /*!
-   @file bat.cpp
+ * @file bat_mini.cpp
     ____  _____      _    ____    _  ___     ____ ____
    |  _ \| ____|_   / \  |  _ \ _/ |/ _ \ _ / ___| ___|
    | | | |  _| (_) / _ \ | | | (_) | | | (_) |   |___ \
@@ -7,34 +7,18 @@
    |____/|_____(_)_/   \_\____/(_)_|\___/(_)\____|____/
 
 
-   Author : e @p0lr_ @mzbat @theDevilsVoice @dead10c5
-   Date   : May 29, 2018
+   Author : @p0lr_ @mzbat @theDevilsVoice @dead10c5
+   Date   : August 2, 2018
    Version: 0.3
+ * 
+ * https://www.arduino.cc/en/Tutorial/ArduinoISP
+ * Board: Attiny 24/44/84
+ * Processor: ATtiny84
+ * Clock: Internal 1MHz
+ * Programmer: arduino as ISP
+ */
 
-   https://www.arduino.cc/en/Tutorial/ArduinoISP
-   Board: Attiny 24/44/84
-   Processor: ATtiny84
-   Clock: Internal 1MHz
-   Programmer: arduino as ISP
-*/
-
-#include "bat.h"
-
-
-void MyBat::ledHalfBreath() {
-  //ramp decreasing intensity, Exhalation (half time):
-  for (int i = BRIGHT - 1; i > 0; i--) {
-    digitalWrite(left_eye, LOW);          // turn the LED on.
-    digitalWrite(right_eye, LOW);
-    delayMicroseconds(i * 10);        // wait
-    digitalWrite(left_eye, HIGH);         // turn the LED off.
-    digitalWrite(right_eye, HIGH);
-    delayMicroseconds(PULSE - i * 10); // wait
-    i--;
-    delay(0);                        //to prevent watchdog firing.
-  }
-  delay(REST);                       //take a rest...
-}
+#include "bat_mini.h"
 
 /* Converts a color from HSV to RGB.
    h is hue, as a number between 0 and 360.
@@ -58,11 +42,4 @@ rgb_color MyBat::hsvToRgb(uint16_t h, uint8_t s, uint8_t v)
   return rgb_color(r, g, b);
 }
 
-uint8_t MyBat::getButtonState() {
-  return _button_state;
-}
-    
-void MyBat::setButtonState(uint8_t bs) {
-  _button_state = bs;
-}
 
