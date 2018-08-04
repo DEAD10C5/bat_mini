@@ -9,7 +9,7 @@
 
    Author : @dead10c5 @p0lr_ @mzbat @theDevilsVoice
    Date   : August 2, 2018
-   Version: 0.3
+   Version: 1.0
 */
 #include "bat_mini.h"
 
@@ -90,7 +90,7 @@ void rainbow() {
       colors[i] = mybat.hsvToRgb((uint32_t)p * 359 / 256, 255, 255);
     }
     ledStrip.write(colors, LED_COUNT, BRIGHTNESS);
-    delay(10);
+    delay(100);
 
     mybat.buttonState = digitalRead(1);
   }
@@ -117,7 +117,7 @@ void flicker() {
       colors[i] = mybat.hsvToRgb((uint32_t)p * 359 / 256, 255, 255);
     }
     ledStrip.write(colors, LED_COUNT, BRIGHTNESS);
-    delay(10);
+    delay(100);
 
     mybat.buttonState = digitalRead(1);
   }
@@ -146,7 +146,7 @@ void sin_wave() {
       ibright = int(sin(tcount) * 255);
       colors[i] = mybat.hsvToRgb(ihue, 255, 255);
       ledStrip.write(colors, LED_COUNT, ibright);
-      delay(10);
+      delay(100);
     }
 
     ledStrip.write(colors, LED_COUNT, 10);
@@ -158,7 +158,7 @@ void sin_wave() {
 void color_pop() {
 
   mybat.buttonState = HIGH;
-  delay(10);
+  delay(100);
 
   int idex = random(0, LED_COUNT);
   int ihue = random(0, 255);
@@ -169,12 +169,27 @@ void color_pop() {
     heartBeat(0.5);
     colors[idex] = mybat.hsvToRgb(ihue, 255, 255);
     ledStrip.write(colors, LED_COUNT, BRIGHTNESS);
-    delay(10);
+    delay(100);
     idex = random(0, LED_COUNT);
     ihue = random(0, 255);
     mybat.buttonState = digitalRead(1);
   }
 } // color_pop()
+
+void nothing() {
+
+  mybat.buttonState = HIGH;
+  delay(10);
+
+  while (mybat.buttonState != LOW) {
+    
+    darkness();
+    delay(100);
+    mybat.buttonState = digitalRead(1);
+    
+  }
+
+} //nothing()
 
 void setup() {
 
@@ -213,6 +228,10 @@ void loop() {
       case 4:
         rainbow();
         darkness();
+        mybat.led_pattern_cur++;
+        break;
+      case 5: 
+        nothing();
         mybat.led_pattern_cur = 1; // button push takes us back to the first pattern
         break;
       default:

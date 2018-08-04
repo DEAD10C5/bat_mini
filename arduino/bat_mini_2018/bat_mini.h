@@ -9,7 +9,7 @@
 
    Author : @p0lr_ @mzbat @theDevilsVoice @dead10c5
    Date   : August 2, 2018
-   Version: 0.3
+   Version: 1.0
 
 
                     ATMEL ATTINY84 / ARDUINO
@@ -40,7 +40,7 @@ IDE Attiny84 Physical Pin
 */
 #ifndef BAT_H
 #define BAT_H
-#define VERSION "0.3"
+#define VERSION "1.0"
 
 
 #define LEDBLINK_MS     1000  // Blink rate (in milliseconds)
