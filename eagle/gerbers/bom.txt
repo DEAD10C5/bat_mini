@@ -1,0 +1,49 @@
+Partlist
+
+Exported from bat_mini_drby_2018.brd at 9/6/18 1:04 PM
+
+EAGLE Version 9.1.2 Copyright (c) 1988-2018 Autodesk, Inc.
+
+Assembly variant: 
+
+Part      Value          Package             Library                       Position (mm)         Orientation
+
+...       ATTINY84-20SSU SOIC127P600X175-14N Atmel_By_element14_Batch_1-00 (54.845 59.625)       R0
+BATT      BATT           1X02                pinhead                       (66.225 50.26875)     MR0
+BT1       CR2032         BATTCON_20MM_4LEGS  SF_Batteries                  (24.375 38.5625)      MR0
+HEART     0805           CHIP-LED0805        led                           (46.9725 34.06625)    R0
+ISP       .              2X03                pinhead                       (32.0725 62.1725)     MR0
+LEFT_EYE  0805           CHIP-LED0805        led                           (41.26 16.9225)       R0
+R1        470?           R0805               resistor                      (22.23125 70.5)       R0
+RIGHT_EYE 0805           CHIP-LED0805        led                           (47.1375 17.65625)    R0
+S1        omron          B3F-10XX            switch-omron                  (31.9125 70.5875)     MR180
+SERIAL    pinhead 1x02   1X02                pinhead                       (52.675 72.21875)     MR0
+U$4       APA102         APA102-2020         pimoroni-optoelectronics      (62.71875 77.38125)   R0
+U$8       APA102         APA102-2020         pimoroni-optoelectronics      (76.44375 49.95625)   R0
+U$9       APA102         APA102-2020         pimoroni-optoelectronics      (62.5875 22.8875)     R0
+U$10      APA102         APA102-2020         pimoroni-optoelectronics      (23.1625 22.125)      R0
+U$11      APA102         APA102-2020         pimoroni-optoelectronics      (8.2875 50.2)         R0
+U$12      APA102         APA102-2020         pimoroni-optoelectronics      (22.175 77.45)        R0
+
+
+
+We would like PCBWAY to add the following surface mount components to the front of the board:
+
+ATTINY84-20SSU SOIC127P600X175-14N
+HEART 0805 CHIP-LED0805 754-1133-1-ND APT2012SURCK  RED
+R1   470 ohm          R0805      (RES SMD 470 OHM 5% 1/8W )
+
+LEFT_EYE  0805           CHIP-LED0805 (yellow or orange) 754-1134-1-ND
+APT2012SYCK 
+RIGHT_EYE 0805           CHIP-LED0805   (yellow or orange) 754-1134-1-ND
+APT2012SYCK 
+
+
+http://www.led-color.com/upload/201604/APA102-2020%20SMD%20LED.pdf
+https://www.aliexpress.com/item/50-1000Pcs-pack-DotStar-Micro-LEDs-APA102-2020-Smart-SMD-RGB-LED-APA102-2020-LED-Matrix/32852025779.html?spm=2114.search0104.3.15.5b674877XjEFvF&ws_ab_test=searchweb0_0,searchweb201602_2_10065_10068_10130_5015318_10547_10546_10059_10548_10545_10696_100031_5015220_10084_10083_10103_451_10618_452_10307_5016018_5015920,searchweb201603_16,ppcSwitch_5&algo_expid=0db12eb9-bf3c-4f67-bcf7-50f50c5f2bff-2&algo_pvid=0db12eb9-bf3c-4f67-bcf7-50f50c5f2bff&priceBeautifyAB=0
+U$4       APA102         APA102-2020 
+U$8       APA102         APA102-2020
+U$9       APA102         APA102-2020
+U$10      APA102         APA102-2020 
+U$11      APA102         APA102-2020 
+U$12      APA102         APA102-2020
