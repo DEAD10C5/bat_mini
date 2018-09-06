@@ -1,3 +1,5 @@
+# Bat Badge 2018  
+
 ## Useful Links
 
 [Set up the programming environment](http://highlowtech.org/?p=1695)
@@ -27,9 +29,11 @@
 
 //                      +----+
 
-# Serial
+## Serial
 
 http://www.ernstc.dk/arduino/tinycom.html
 
 
 https://www.adafruit.com/product/954
+
+https://github.com/adafruit/travis-ci-arduino
