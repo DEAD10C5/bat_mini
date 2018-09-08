@@ -21,6 +21,8 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
+HOME="/home/travis"
+
 # we need bash 4 for associative arrays
 if [ "${BASH_VERSION%%[^0-9]*}" -lt "4" ]; then
   echo "BASH VERSION < 4: ${BASH_VERSION}" >&2
