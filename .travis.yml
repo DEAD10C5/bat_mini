@@ -18,13 +18,14 @@ env:
 before_install:
   - source <(curl -SLs https://raw.githubusercontent.com/DEAD10C5/bat_mini/master/install.sh)
 install:
-  - ln -s $PWD /usr/local/share/arduino/libraries/Adafruit_FONA
-  #- arduino --install-library "APA102"
+        #- ln -s $PWD /usr/local/share/arduino/libraries/Adafruit_FONA
+  - arduino --install-library "APA102"
 
 script:
   #- arduino --verify --board arduino:avr:uno $PWD/examples/FONAtest/FONAtest.ino
   #- arduino --verify --board arduino:avr:uno $PWD/examples/IncomingCall/IncomingCall.ino
   #- arduino --verify --board arduino:avr:uno $PWD/examples/AdafruitIO_GPS/AdafruitIO_GPS.ino
+  - arduino --verify --board arduino:ATtiny:ATtiny  /usr/local/share/arduino/libraries/APA102
   - build_platform attiny
 notifications:
   email:
