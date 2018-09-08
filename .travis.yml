@@ -16,7 +16,7 @@ env:
 #    - DOXYFILE: /home/travis/build/theDevilsVoice/NolaCon_2018/arduino/nola_con/Doxyfile
 
 before_install:
-        #- source <(curl -SLs https://raw.githubusercontent.com/DEAD10C5/bat_mini/master/install.sh)
+  - source <(curl -SLs https://raw.githubusercontent.com/DEAD10C5/bat_mini/master/install.sh)
 install:
   #- ln -s $PWD /usr/local/share/arduino/libraries/Adafruit_FONA
   - arduino --install-library "APA102"
