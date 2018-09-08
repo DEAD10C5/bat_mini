@@ -25,8 +25,9 @@ script:
   #- arduino --verify --board arduino:avr:uno $PWD/examples/FONAtest/FONAtest.ino
   #- arduino --verify --board arduino:avr:uno $PWD/examples/IncomingCall/IncomingCall.ino
   #- arduino --verify --board arduino:avr:uno $PWD/examples/AdafruitIO_GPS/AdafruitIO_GPS.ino
-  - arduino --verify --board arduino:ATtiny:ATtiny  /usr/local/share/arduino/libraries/APA102
-  - build_platform attiny
+  #- arduino --verify --board arduino:ATtiny:ATtiny  /usr/local/share/arduino/libraries/APA102
+  #- build_platform attiny
+  - build_main_platforms 
 notifications:
   email:
     on_success: change
