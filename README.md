@@ -1,4 +1,6 @@
-# Bat Badge 2018  https://travis-ci.org/DEAD10C5/bat_mini.svg?branch=master
+# Bat Badge 2018  
+
+https://travis-ci.org/DEAD10C5/bat_mini.svg?branch=master
 
 ## Useful Links
 
