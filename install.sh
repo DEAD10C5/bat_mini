@@ -136,9 +136,9 @@ function build_platform()
   # arrays can't be exported, so we have to eval
   eval $MAIN_PLATFORMS
   eval $AUX_PLATFORMS
-  eval $CPLAY_PLATFORMS
-  eval $M4_PLATFORMS
-  eval $IO_PLATFORMS
+  #eval $CPLAY_PLATFORMS
+  #eval $M4_PLATFORMS
+  #eval $IO_PLATFORMS
 
   # reset platform json var
   PLATFORM_JSON=""
