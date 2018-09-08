@@ -20,9 +20,6 @@
 #===============================================================================
 
 #set -o nounset                              # Treat unset variables as an error
-#set +u
-
-HOME="/home/travis"
 
 # we need bash 4 for associative arrays
 #if [ "${BASH_VERSION%%[^0-9]*}" -lt "4" ]; then
@@ -92,7 +89,7 @@ echo -e """$GREEN""\xe2\x9c\x93"
 fi
 
 # link test library folder to the arduino libraries folder
-ln -s $TRAVIS_BUILD_DIR $HOME/arduino_ide/libraries/Adafruit_Test_Library
+#ln -s $TRAVIS_BUILD_DIR $HOME/arduino_ide/libraries/Adafruit_Test_Library
 
 # add the arduino CLI to our PATH
 export PATH="$HOME/arduino_ide:$PATH"
@@ -108,7 +105,7 @@ DEPENDENCY_OUTPUT=$(arduino --pref "boardsmanager.additional.urls=https://raw.gi
 if [ $? -ne 0 ]; then echo -e """$RED""\xe2\x9c\x96"; else echo -e """$GREEN""\xe2\x9c\x93"; fi
 
 echo -n "ATtiny84: "
-DEPENDENCY_OUTPUT=$(arduino --install-boards ATtiny:ATtiny 2>&1)
+DEPENDENCY_OUTPUT=$(arduino --install-boards attiny:attiny 2>&1)
 if [ $? -ne 0 ]; then echo -e "\xe2\x9c\x96 OR CACHED"; else echo -e """$GREEN""\xe2\x9c\x93"; fi
 
 

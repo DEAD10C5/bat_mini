@@ -28,7 +28,7 @@ script:
   #- arduino --verify --board arduino:avr:uno $PWD/examples/AdafruitIO_GPS/AdafruitIO_GPS.ino
   #- arduino --verify --board arduino:ATtiny:ATtiny  /usr/local/share/arduino/libraries/APA102
   - arduino  --board arduino:avr:uno $PWD/examples/APA102/Brightness.ino
-  #- build_platform attiny
+  - build_platform attiny
   #- build_main_platforms 
 notifications:
   email:
