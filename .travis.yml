@@ -27,8 +27,8 @@ script:
   #- arduino --verify --board arduino:avr:uno $PWD/examples/FONAtest/FONAtest.ino
   #- arduino --verify --board arduino:avr:uno $PWD/examples/IncomingCall/IncomingCall.ino
   #- arduino --verify --board arduino:avr:uno $PWD/examples/AdafruitIO_GPS/AdafruitIO_GPS.ino
-  - arduino --verify --board arduino:ATtiny:ATtiny $PWD/DEAD10C5/bat_mini/arduino/bat_mini_2018.ino
-  - arduino --verify --board arduino:ATtiny:ATtiny84 /home/travis/arduino_ide/libraries/APA102/examples/Brightness/Brightness.ino
+  - arduino --verify --board arduino:attiny:attiny $PWD/DEAD10C5/bat_mini/arduino/bat_mini_2018.ino
+  - arduino --verify --board arduino:attiny:attiny /home/travis/arduino_ide/libraries/APA102/examples/Brightness/Brightness.ino
 notifications:
   email:
     on_success: change
