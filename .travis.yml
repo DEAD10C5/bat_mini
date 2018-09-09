@@ -2,7 +2,7 @@ language: c
 sudo: false
 cache:
   directories:
-    - ~/arduino_ide
+    #- ~/arduino_ide
     - ~/.arduino15/packages/
 git:
   depth: false
@@ -22,7 +22,7 @@ install:
 
 script:
   - build_platform attiny
-  - arduino --verify --board attiny:avr:attiny /home/travis/DEAD10C5/bat_mini/arduino/bat_mini_2018.ino
+  - arduino --verify --board attiny:avr:attiny $TRAVIS_BUILD_DIR/DEAD10C5/bat_mini/arduino/bat_mini_2018.ino
  
 notifications:
   email:
