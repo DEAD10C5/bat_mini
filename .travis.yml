@@ -1,8 +1,5 @@
 language: c
 sudo: true
-cache:
-  directories:
-    - /usr/local/share/arduino
 git:
   depth: false
   quiet: true
