@@ -2,8 +2,7 @@ language: c
 sudo: false
 cache:
   directories:
-    #- ~/arduino_ide
-    - ~/.arduino15/packages/
+    - /usr/local/share/arduino
 git:
   depth: false
   quiet: true
@@ -11,18 +10,24 @@ env:
   global:
     - PRETTYNAME="Bat Badge 2018"
     - ARDUINO_IDE_VERSION="1.8.6"
-    # Optional, will default to "$TRAVIS_BUILD_DIR/Doxyfile"
-    #-  DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
-    #- DOXYFILE: /home/travis/build/theDevilsVoice/NolaCon_2018/arduino/nola_con/Doxyfile
-
+    - BD="attiny:avr:attiny:Processor=ATtiny84,Clock=1 MHz (internal)"
 before_install:
-  - source <(curl -SLs https://raw.githubusercontent.com/DEAD10C5/bat_mini/master/install.sh)
+  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
+  - sleep 3
+  - export DISPLAY=:1.0
+  - wget http://downloads.arduino.cc/arduino-1.8.6-linux64.tar.xz
+  - tar xf arduino-1.8.6-linux64.tar.xz
+  - sudo mv arduino-1.8.6 /usr/local/share/arduino
+  - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
 install:
-  - arduino --install-library "APA102"
-
+  - ln -s $PWD /usr/local/share/arduino/libraries/
+  - arduino --pref "boardsmanager.additional.urls=https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json"" --save-prefs
+  - arduino --install-boards attiny:avr
+  - arduino --board $BD --save-prefs
+  - arduino --pref "compiler.warning_level=all" --save-prefs
+  - git clone https://github.com/pololu/apa102-arduino.git /usr/local/share/arduino/libraries/apa102-arduino
 script:
-  - build_platform attiny
-  - arduino --verify --board attiny:avr:attiny $TRAVIS_BUILD_DIR/DEAD10C5/bat_mini/arduino/bat_mini_2018.ino
+  - arduino --verify --board $BD /usr/local/share/arduino/libraries/DEAD10C5/bat_mini/arduino/bat_mini_2018.ino
  
 notifications:
   email:
