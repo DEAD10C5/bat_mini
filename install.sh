@@ -103,7 +103,7 @@ echo -n "ADD PACKAGE INDEX: "
 DEPENDENCY_OUTPUT=$(arduino --pref "boardsmanager.additional.urls=https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json" --save-prefs 2>&1)
 if [ $? -ne 0 ]; then echo -e """$RED""\xe2\x9c\x96"; else echo -e """$GREEN""\xe2\x9c\x93"; fi
 
-echo -n "ATtiny84: "
+echo -n "attiny: "
 DEPENDENCY_OUTPUT=$(arduino --install-boards attiny:avr 2>&1)
 if [ $? -ne 0 ]; then echo -e "\xe2\x9c\x96 OR CACHED"; else echo -e """$GREEN""\xe2\x9c\x93"; fi
 
@@ -116,6 +116,12 @@ if [ $? -ne 0 ]; then echo -e """$RED""\xe2\x9c\x96"; else echo -e """$GREEN""\x
 # set the maximal compiler warning level
 echo -n "SET BUILD PREFERENCES: "
 DEPENDENCY_OUTPUT=$(arduino --pref "compiler.warning_level=all" --save-prefs 2>&1)
+if [ $? -ne 0 ]; then echo -e """$RED""\xe2\x9c\x96"; else echo -e """$GREEN""\xe2\x9c\x93"; fi
+
+DEPENDENCY_OUTPUT=$(arduino --pref "custom_cpu=attiny_attiny84" --save-prefs 2>&1)
+if [ $? -ne 0 ]; then echo -e """$RED""\xe2\x9c\x96"; else echo -e """$GREEN""\xe2\x9c\x93"; fi
+
+DEPENDENCY_OUTPUT=$(arduino --pref "custom_clock=attiny_internal1" --save-prefs 2>&1)
 if [ $? -ne 0 ]; then echo -e """$RED""\xe2\x9c\x96"; else echo -e """$GREEN""\xe2\x9c\x93"; fi
 
 # init the json temp var for the current platform
@@ -183,7 +189,7 @@ function build_platform()
   # we have to avoid reading the exit code of local:
   # "when declaring a local variable in a function, the local acts as a command in its own right"
   local platform_stdout
-  platform_stdout=$(arduino --board attiny84:avr:ATtiny84 --save-prefs 2>&1)
+  platform_stdout=$(arduino --board attiny:avr:attiny:cpu=attiny84 --save-prefs 2>&1)
 
   # grab the exit status of the arduino board change
   local platform_switch=$?
