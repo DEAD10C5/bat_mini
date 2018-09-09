@@ -10,28 +10,25 @@ git:
 env:
   global:
     - PRETTYNAME="Bat Badge 2018"
-    - ARDUINO_IDE_VERSION="1.8.5"
-# Optional, will default to "$TRAVIS_BUILD_DIR/Doxyfile"
+    - ARDUINO_IDE_VERSION="1.8.6"
+      # Optional, will default to "$TRAVIS_BUILD_DIR/Doxyfile"
 #    - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
 #    - DOXYFILE: /home/travis/build/theDevilsVoice/NolaCon_2018/arduino/nola_con/Doxyfile
 
 before_install:
   - source <(curl -SLs https://raw.githubusercontent.com/DEAD10C5/bat_mini/master/install.sh)
 install:
-  #- ln -s $PWD /usr/local/share/arduino/libraries/Adafruit_FONA
   - arduino --install-library "APA102"
-  #- arduino --install-library "Adafruit SleepyDog Library,Adafruit MQTT Library"
 
 script:
-  - build_main_platforms
   #- arduino --verify --board arduino:avr:uno $PWD/examples/FONAtest/FONAtest.ino
   #- arduino --verify --board arduino:avr:uno $PWD/examples/IncomingCall/IncomingCall.ino
   #- arduino --verify --board arduino:avr:uno $PWD/examples/AdafruitIO_GPS/AdafruitIO_GPS.ino
-  - arduino --verify --board arduino:avr:attiny --verbose-build $PWD/DEAD10C5/bat_mini/arduino/bat_mini_2018.ino
-  - arduino --verify --board arduino:avr:attiny --verbose-build /home/travis/arduino_ide/libraries/APA102/examples/Brightness/Brightness.ino
-  - arduino  --board arduino:avr:uno $PWD/examples/APA102/Brightness.ino
+  #- arduino --verify --board attiny:avr:attiny --verbose-build $PWD/DEAD10C5/bat_mini/arduino/bat_mini_2018.ino
+          #- arduino --verify --board arduino:avr:uno --verbose-build $PWD/APA102/examples/Brightness/Brightness.ino
+          #- arduino  --board arduino:avr:attiny $PWD/APA102/Brightness.ino
   - build_platform attiny
-  #- build_main_platforms 
+ 
 notifications:
   email:
     on_success: change
