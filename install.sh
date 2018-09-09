@@ -36,7 +36,7 @@
 # associative array for other platforms that can be called explicitly in .travis.yml configs
 # this will be eval'd in the functions below because arrays can't be exported
 #export AUX_PLATFORMS='declare -A aux_platforms=( [trinket]="adafruit:avr:trinket5" [gemma]="arduino:avr:gemma" )'
-export MAIN_PLATFORMS='declare -A main_platforms=( [attiny]="attiny:avr:ATtiny84:Processor=ATtiny84" )'
+export MAIN_PLATFORMS='declare -A main_platforms=( [attiny]="attiny:avr" )'
 export CPLAY_PLATFORMS='declare -A cplay_platforms=( [cplayClassic]="arduino:avr:circuitplay32u4cat" [cplayExpress]="arduino:samd:adafruit_circuitplayground_m0" ) '
 
 export SAMD_PLATFORMS='declare -A samd_platforms=( [zero]="arduino:samd:arduino_zero_native", [cplayExpress]="arduino:samd:adafruit_circuitplayground_m0", [m4]="adafruit:samd:adafruit_metro_m4" )'
@@ -104,7 +104,7 @@ DEPENDENCY_OUTPUT=$(arduino --pref "boardsmanager.additional.urls=https://raw.gi
 if [ $? -ne 0 ]; then echo -e """$RED""\xe2\x9c\x96"; else echo -e """$GREEN""\xe2\x9c\x93"; fi
 
 echo -n "ATtiny84: "
-DEPENDENCY_OUTPUT=$(arduino --install-boards attiny:avr:ATtiny84 2>&1)
+DEPENDENCY_OUTPUT=$(arduino --install-boards attiny:avr 2>&1)
 if [ $? -ne 0 ]; then echo -e "\xe2\x9c\x96 OR CACHED"; else echo -e """$GREEN""\xe2\x9c\x93"; fi
 
 
