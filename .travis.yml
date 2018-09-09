@@ -27,7 +27,7 @@ install:
   - arduino --pref "compiler.warning_level=all" --save-prefs
   - git clone https://github.com/pololu/apa102-arduino.git /usr/local/share/arduino/libraries/apa102-arduino
 script:
-  - arduino --verify --board $BD $PWD/bat_mini/arduino/bat_mini_2018.ino
+  - arduino --verify --board $BD /usr/local/share/arduino/libraries/bat_mini/arduino/bat_mini_2018.ino
  
 notifications:
   email:
