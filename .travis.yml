@@ -21,8 +21,7 @@ install:
   - arduino --install-library "APA102"
 
 script:
-  - arduino --install-boards attiny:avr --save-prefs
-  - arduino --verify --board attiny:avr:attiny:cpu=attiny84 $PWD/DEAD10C5/bat_mini/arduino/bat_mini_2018.ino
+  - arduino --verify --board attiny:avr:attiny:cpu=attiny84 /home/travis/DEAD10C5/bat_mini/arduino/bat_mini_2018.ino
   - build_platform attiny
  
 notifications:
