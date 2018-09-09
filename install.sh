@@ -189,11 +189,10 @@ function build_platform()
   # we have to avoid reading the exit code of local:
   # "when declaring a local variable in a function, the local acts as a command in its own right"
   local platform_stdout
-  platform_stdout=$(arduino --board attiny:avr --save-prefs 2>&1)
+  platform_stdout=$(arduino --board attiny:avr:attiny --save-prefs 2>&1)
 
   # grab the exit status of the arduino board change
   local platform_switch=$?
-echo $platform_switch 
   # notify if the platform switch failed
   if [ $platform_switch -ne 0 ]; then
     # heavy X
