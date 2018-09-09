@@ -4,10 +4,7 @@ git:
   depth: false
   quiet: true
 env:
-  global:
-    - PRETTYNAME="Bat Badge 2018"
-    - ARDUINO_IDE_VERSION="1.8.6"
-    - BD="attiny:avr:attiny"
+  - BD="attiny:avr:attiny"
 before_install:
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
   - sleep 3

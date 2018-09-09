@@ -47,6 +47,29 @@ IDE Attiny84 Physical Pin
 
 #include <Arduino.h>
 #include <APA102.h>
+#include <SoftwareSerial.h>
+
+// ***
+// *** Define the RX and TX pins. Choose any two
+// *** pins that are unused. Try to avoid D0 (pin 5)
+// *** and D2 (pin 7) if you plan to use I2C.
+// ***
+#define RX    2
+#define TX    3
+
+/*
+ *     
+ *  3V3/5V - This wire is optional and can be used to power your circuit during testing. You can power your circuit only when the 
+ *  current demand is limited (less than 500 mA). This wire is usually red (color may be vary).
+    GND - This wire is required and should be connected to pin 4 on the ATtiny85 (or to whatever point you designated as ground). 
+    This wire is usually black (color may be vary).
+    TX - This wire is used by the external device to send data to your ATtiny85. This wire should be connected to the pin you 
+    designated as RX when you setup your Software Serial instance. On FTDI cables, this wire is usually orange. On the USB to TTL 
+    Serial Cable this wire is usually green (color may be vary).
+    RX - This wire is used by the external device to receive data from your ATtiny85. This wire should be connected to the pin 
+    you designated as TX when you setup your Software Serial instance. On FTDI cables, this wire is usually yellow. On the USB 
+    to TTL Serial Cable this wire is usually white (color may be vary).
+ */
 
 // pins'n'stuff
 const uint8_t  DATA_PIN   = PA2;

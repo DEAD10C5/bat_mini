@@ -13,6 +13,8 @@
 */
 #include "bat_mini.h"
 
+SoftwareSerial Serial(RX, TX);
+
 MyBat mybat;
 
 APA102<DATA_PIN, CLOCK_PIN> ledStrip;
@@ -55,7 +57,7 @@ void heartBeat(float tempo) {
       digitalWrite(HEART, LOW);
     }
     hbeatIndex++;
-    // Serial.println(hbeatIndex);
+    Serial.println(hbeatIndex);
     prevMillis = millis();
 
   }
@@ -192,7 +194,8 @@ void led_only() {
 } //led_only()
 
 void setup() {
-
+  Serial.begin(9600);
+  Serial.println("Initializing...");
   pinMode(LEFT_EYE, OUTPUT);
   pinMode(RIGHT_EYE, OUTPUT);
   pinMode(HEART, OUTPUT);
