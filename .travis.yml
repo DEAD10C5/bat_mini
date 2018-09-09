@@ -20,10 +20,10 @@ install:
   - ln -s $PWD /usr/local/share/arduino/libraries/
   - arduino --pref "boardsmanager.additional.urls=https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json" --save-prefs
   - arduino --install-boards attiny:avr
-  - arduino --pref "custom_clock=attiny_internal1"  --save-prefs
-  - arduino --pref "custom_cpu=attiny_attiny84" --save-prefs
   - arduino --board $BD --save-prefs
   - arduino --pref "compiler.warning_level=all" --save-prefs
+  - arduino --pref "custom_clock=attiny_internal1"  --save-prefs
+  - arduino --pref "custom_cpu=attiny_attiny84" --save-prefs
   - git clone https://github.com/pololu/apa102-arduino.git /usr/local/share/arduino/libraries/apa102-arduino
 script:
   - arduino --verify --board $BD $TRAVIS_BUILD_DIR/DEAD10C5/arduino/bat_mini_2018.ino
