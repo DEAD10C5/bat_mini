@@ -22,11 +22,11 @@ install:
   - arduino --install-boards attiny:avr
   - arduino --board $BD --save-prefs
   - arduino --pref "compiler.warning_level=all" --save-prefs
-  - arduino --pref "custom_clock=attiny_internal1"  --save-prefs
-  - arduino --pref "custom_cpu=attiny_attiny84" --save-prefs
+  #- arduino --pref "custom_clock=attiny_internal1"  --save-prefs
+  #- arduino --pref "custom_cpu=attiny_attiny84" --save-prefs
   - git clone https://github.com/pololu/apa102-arduino.git /usr/local/share/arduino/libraries/apa102-arduino
 script:
-  - arduino --verify --board $BD $TRAVIS_BUILD_DIR/DEAD10C5/arduino/bat_mini_2018.ino
+  - arduino --verify --board $BD $TRAVIS_BUILD_DIR/bat_mini/arduino/bat_mini_2018.ino
  
 notifications:
   email:
