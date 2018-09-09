@@ -140,7 +140,7 @@ function build_platform()
   #eval $IO_PLATFORMS
 
   # reset platform json var
-  PLATFORM_JSON=""
+  PLATFORM_JSON="https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json"
 
   # expects argument 1 to be the platform key
   local platform_key=$1
