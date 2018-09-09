@@ -89,7 +89,6 @@ echo -n "CACHED: "
 echo -e """$GREEN""\xe2\x9c\x93"
 fi
 
-
 # add the arduino CLI to our PATH
 export PATH="$HOME/arduino_ide:$PATH"
 
@@ -145,7 +144,7 @@ function build_platform()
   #eval $IO_PLATFORMS
 
   # reset platform json var
-  PLATFORM_JSON="https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json"
+  PLATFORM_JSON=""
 
   # expects argument 1 to be the platform key
   local platform_key=$1
@@ -189,7 +188,7 @@ function build_platform()
   # we have to avoid reading the exit code of local:
   # "when declaring a local variable in a function, the local acts as a command in its own right"
   local platform_stdout
-  platform_stdout=$(arduino --board attiny:avr:attiny --save-prefs 2>&1)
+  platform_stdout=$(arduino --board attiny:avr:attiny_attiny84 --save-prefs 2>&1)
 
   # grab the exit status of the arduino board change
   local platform_switch=$?
