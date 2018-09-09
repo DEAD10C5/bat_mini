@@ -19,8 +19,8 @@ install:
    # you could add attiny the extra attiny board package
   - wget https://github.com/damellis/attiny/archive/master.zip
   - unzip master.zip
-  - mkdir -p ~/.arduino15/packages/attiny/hardware/avr/
-  - sudo mv master ~/.arduino15/packages/attiny/hardware/avr/1.0.2
+  - mkdir -p /usr/local/share/arduino/hardware/attiny/avr/
+  - sudo mv master /usr/local/share/arduino/hardware/attiny/avr/1.0.2
   - arduino --install-boards attiny:avr 
   - arduino --board $BD --save-prefs
   - arduino --pref "compiler.warning_level=all" --save-prefs
