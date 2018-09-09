@@ -18,9 +18,9 @@ install:
   #- arduino --pref "boardsmanager.additional.urls=http://arduino.esp8266.com/stable/package_esp8266com_index.json,https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json" --save-prefs
    # you could add attiny the extra attiny board package
   - wget https://github.com/damellis/attiny/archive/master.zip
-  - unzip attiny-master.zip
+  - unzip master.zip
   - mkdir -p ~/.arduino15/packages/attiny/hardware/avr/
-  - sudo mv attiny-master/attiny ~/.arduino15/packages/attiny/hardware/avr/1.0.2
+  - sudo mv master ~/.arduino15/packages/attiny/hardware/avr/1.0.2
   - arduino --install-boards attiny:avr 
   - arduino --board $BD --save-prefs
   - arduino --pref "compiler.warning_level=all" --save-prefs
