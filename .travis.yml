@@ -1,16 +1,10 @@
 language: c
-sudo: false
-cache:
-  directories:
-    - /usr/local/share/arduino
+sudo: true
 git:
   depth: false
   quiet: true
 env:
-  global:
-    - PRETTYNAME="Bat Badge 2018"
-    - ARDUINO_IDE_VERSION="1.8.6"
-    - BD="attiny:avr:attiny:Processor=ATtiny84,Clock=1 MHz (internal)"
+  - BD="attiny:avr:attiny"
 before_install:
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
   - sleep 3
@@ -21,13 +15,15 @@ before_install:
   - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
 install:
   - ln -s $PWD /usr/local/share/arduino/libraries/
-  - arduino --pref "boardsmanager.additional.urls=https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json"" --save-prefs
-  - arduino --install-boards attiny:avr
+  - arduino --pref "boardsmanager.additional.urls=http://arduino.esp8266.com/stable/package_esp8266com_index.json,https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json" --save-prefs
+  - arduino --install-boards attiny:avr:1.0.2
   - arduino --board $BD --save-prefs
   - arduino --pref "compiler.warning_level=all" --save-prefs
+  - arduino --pref "custom_clock=attiny_internal1"  --save-prefs
+  - arduino --pref "custom_cpu=attiny_attiny84" --save-prefs
   - git clone https://github.com/pololu/apa102-arduino.git /usr/local/share/arduino/libraries/apa102-arduino
 script:
-  - arduino --verify --board $BD /usr/local/share/arduino/libraries/DEAD10C5/bat_mini/arduino/bat_mini_2018.ino
+  - arduino --verify --board $BD $TRAVIS_BUILD_DIR/bat_mini/arduino/bat_mini_2018.ino
  
 notifications:
   email:

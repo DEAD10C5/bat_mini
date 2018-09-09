@@ -13,6 +13,8 @@
 */
 #include "bat_mini.h"
 
+SoftwareSerial Serial(RX, TX);
+
 MyBat mybat;
 
 APA102<DATA_PIN, CLOCK_PIN> ledStrip;
@@ -55,7 +57,7 @@ void heartBeat(float tempo) {
       digitalWrite(HEART, LOW);
     }
     hbeatIndex++;
-    // Serial.println(hbeatIndex);
+    Serial.println(hbeatIndex);
     prevMillis = millis();
 
   }
@@ -176,23 +178,24 @@ void color_pop() {
   }
 } // color_pop()
 
-void nothing() {
+void led_only() {
 
   mybat.buttonState = HIGH;
-  delay(10);
+  delay(100);
 
   while (mybat.buttonState != LOW) {
-    
-    darkness();
+    // pulse the eyes all the time
+    eyes();
+    heartBeat(0.5);
     delay(100);
     mybat.buttonState = digitalRead(1);
-    
   }
 
-} //nothing()
+} //led_only()
 
 void setup() {
-
+  Serial.begin(9600);
+  Serial.println("Initializing...");
   pinMode(LEFT_EYE, OUTPUT);
   pinMode(RIGHT_EYE, OUTPUT);
   pinMode(HEART, OUTPUT);
@@ -231,7 +234,7 @@ void loop() {
         mybat.led_pattern_cur++;
         break;
       case 5: 
-        nothing();
+        led_only();
         mybat.led_pattern_cur = 1; // button push takes us back to the first pattern
         break;
       default:
