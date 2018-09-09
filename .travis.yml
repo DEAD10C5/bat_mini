@@ -21,12 +21,7 @@ install:
   - arduino --install-library "APA102"
 
 script:
-  #- arduino --verify --board arduino:avr:uno $PWD/examples/FONAtest/FONAtest.ino
-  #- arduino --verify --board arduino:avr:uno $PWD/examples/IncomingCall/IncomingCall.ino
-  #- arduino --verify --board arduino:avr:uno $PWD/examples/AdafruitIO_GPS/AdafruitIO_GPS.ino
-  #- arduino --verify --board attiny:avr:attiny --verbose-build $PWD/DEAD10C5/bat_mini/arduino/bat_mini_2018.ino
-          #- arduino --verify --board arduino:avr:uno --verbose-build $PWD/APA102/examples/Brightness/Brightness.ino
-          #- arduino  --board arduino:avr:attiny $PWD/APA102/Brightness.ino
+  - arduino --verify --board attiny:avr:ATtiny84 --verbose-build $PWD/DEAD10C5/bat_mini/arduino/bat_mini_2018.ino
   - build_platform attiny
  
 notifications:
