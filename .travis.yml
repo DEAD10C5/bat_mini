@@ -2,7 +2,7 @@ language: c
 sudo: true
 git:
   depth: false
-  #quiet: true
+  quiet: true
 env:
   global:
     - PRETTYNAME="Bat Badge 2018"
@@ -18,12 +18,12 @@ before_install:
   - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
 install:
   - ln -s $PWD /usr/local/share/arduino/libraries/
-  - arduino --pref "boardsmanager.additional.urls=https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json" --save-prefs
-  - arduino --install-boards attiny:avr
+  - arduino --pref "boardsmanager.additional.urls=http://arduino.esp8266.com/stable/package_esp8266com_index.json,https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json" --save-prefs
+  - arduino --install-boards attiny:avr:1.0.2
   - arduino --board $BD --save-prefs
   - arduino --pref "compiler.warning_level=all" --save-prefs
-  #- arduino --pref "custom_clock=attiny_internal1"  --save-prefs
-  #- arduino --pref "custom_cpu=attiny_attiny84" --save-prefs
+  - arduino --pref "custom_clock=attiny_internal1"  --save-prefs
+  - arduino --pref "custom_cpu=attiny_attiny84" --save-prefs
   - git clone https://github.com/pololu/apa102-arduino.git /usr/local/share/arduino/libraries/apa102-arduino
 script:
   - arduino --verify --board $BD $TRAVIS_BUILD_DIR/bat_mini/arduino/bat_mini_2018.ino
