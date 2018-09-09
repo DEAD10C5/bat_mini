@@ -1,5 +1,5 @@
 language: c
-sudo: true
+sudo: require
 git:
   depth: false
   quiet: true
@@ -20,7 +20,7 @@ install:
   - wget https://github.com/damellis/attiny/archive/master.zip
   - unzip master.zip
   - mkdir -p /usr/local/share/arduino/hardware/attiny/avr/
-  - sudo mv master /usr/local/share/arduino/hardware/attiny/avr/1.0.2
+  - mv attiny-master /usr/local/share/arduino/hardware/attiny/avr/1.0.2
   - arduino --install-boards attiny:avr 
   - arduino --board $BD --save-prefs
   - arduino --pref "compiler.warning_level=all" --save-prefs
