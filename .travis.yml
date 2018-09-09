@@ -8,7 +8,7 @@ git:
   depth: false
   quiet: true
 env:
-  - BD="attiny:avr:ATtiny84"
+  - BD="attiny:avr:attiny"
 before_install:
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
   - sleep 3
@@ -22,8 +22,8 @@ install:
   - arduino --pref "boardsmanager.additional.urls=http://arduino.esp8266.com/stable/package_esp8266com_index.json,https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json" --save-prefs
   - wget https://github.com/damellis/attiny/archive/master.zip
   - unzip master.zip
-  - mkdir -p /usr/local/share/arduino/hardware/attiny
-  - mv attiny-master /usr/local/share/arduino/hardware/attiny/avr
+  - sudo mkdir -p /usr/local/share/arduino/hardware/attiny
+  - sudo mv attiny-master /usr/local/share/arduino/hardware/attiny/avr
   - arduino --install-boards attiny:avr 
   - arduino --board $BD --save-prefs
   - arduino --pref "compiler.warning_level=all" --save-prefs
