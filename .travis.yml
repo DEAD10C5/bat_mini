@@ -1,5 +1,5 @@
 language: c
-sudo: false
+sudo: true
 cache:
   directories:
     - /usr/local/share/arduino
