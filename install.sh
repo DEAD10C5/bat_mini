@@ -104,7 +104,7 @@ DEPENDENCY_OUTPUT=$(arduino --pref "boardsmanager.additional.urls=https://raw.gi
 if [ $? -ne 0 ]; then echo -e """$RED""\xe2\x9c\x96"; else echo -e """$GREEN""\xe2\x9c\x93"; fi
 
 echo -n "ATtiny84: "
-DEPENDENCY_OUTPUT=$(arduino --install-boards arduino:avr 2>&1)
+DEPENDENCY_OUTPUT=$(arduino --install-boards attiny:avr 2>&1)
 if [ $? -ne 0 ]; then echo -e "\xe2\x9c\x96 OR CACHED"; else echo -e """$GREEN""\xe2\x9c\x93"; fi
 
 
