@@ -209,7 +209,7 @@ void setup() {
 
 void loop() {
 
-
+  Serial.println("Make a selection...");
 
   if (mybat.buttonState == LOW) {
     switch (mybat.led_pattern_cur) {

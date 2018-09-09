@@ -54,8 +54,8 @@ IDE Attiny84 Physical Pin
 // *** pins that are unused. Try to avoid D0 (pin 5)
 // *** and D2 (pin 7) if you plan to use I2C.
 // ***
-#define RX    2
-#define TX    3
+#define RX    PB1
+#define TX    PB0
 
 /*
  *     
