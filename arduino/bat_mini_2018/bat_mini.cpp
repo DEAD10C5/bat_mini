@@ -8,8 +8,8 @@
 
 
    Author : @p0lr_ @mzbat @theDevilsVoice @dead10c5
-   Date   : August 2, 2018
-   Version: 1.0
+   Date   : September 15th, 2018
+   Version: 1.1
  * 
  * https://www.arduino.cc/en/Tutorial/ArduinoISP
  * Board: Attiny 24/44/84
