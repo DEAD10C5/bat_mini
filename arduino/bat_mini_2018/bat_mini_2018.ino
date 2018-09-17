@@ -195,9 +195,9 @@ void led_only() {
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("##############################"
-  Serial.println("# DE:AD:10:C5 Bat Badge 2018 #"
-  Serial.println("##############################"
+  Serial.println("##############################");
+  Serial.println("# DE:AD:10:C5 Bat Badge 2018 #");
+  Serial.println("##############################");
   Serial.println("This badge was a lot of work and a lot of fun. Hope you enjoy it!");
   Serial.println("...");
   Serial.println("Initializing...");
