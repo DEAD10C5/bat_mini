@@ -8,8 +8,8 @@
 
 
    Author : @p0lr_ @mzbat @theDevilsVoice @dead10c5
-   Date   : September 15th, 2018
-   Version: 1.1
+   Date   : September 20th, 2018
+   Version: 1.2
  * 
  * https://www.arduino.cc/en/Tutorial/ArduinoISP
  * Board: Attiny 24/44/84
@@ -41,5 +41,3 @@ rgb_color MyBat::hsvToRgb(uint16_t h, uint8_t s, uint8_t v)
   }
   return rgb_color(r, g, b);
 }
-
-

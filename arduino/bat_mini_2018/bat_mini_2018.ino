@@ -8,8 +8,8 @@
 
 
    Author : @dead10c5 @p0lr_ @mzbat @theDevilsVoice
-   Date   : September 15th, 2018
-   Version: 1.1
+   Date   : September 20th, 2018
+   Version: 1.2
 */
 #include "bat_mini.h"
 
@@ -61,7 +61,7 @@ void heartBeat(float tempo) {
     prevMillis = millis();
 
   }
- 
+
 }
 
 void darkness() {
@@ -85,7 +85,7 @@ void rainbow() {
   delay(100);
 
   while (mybat.buttonState != LOW) {
-    
+
     uint8_t time = millis() >> 4;
     for (uint16_t i = 0; i < LED_COUNT; i++) {
       uint8_t p = time - i * 8;
@@ -112,7 +112,7 @@ void flicker() {
 
     //heartbeat();
     heartBeat(1.0);
-    
+
     uint8_t time = millis() >> 4;
     for (uint16_t i = 0; i < LED_COUNT; i++) {
       uint8_t p = time - i * 8;
@@ -178,6 +178,51 @@ void color_pop() {
   }
 } // color_pop()
 
+void cyber_police() {
+
+  mybat.buttonState = HIGH;
+  delay(100);
+  while (mybat.buttonState != LOW) {
+    // pulse the eyes all the time
+    eyes();
+    heartBeat(0.5);
+    for (uint16_t i = 0; i < LED_COUNT; i++)
+    {
+      if (i % 2 == 0) {
+        //uint8_t x = time - i * 8;
+        colors[i].red = 0;
+        colors[i].green = 0;
+        colors[i].blue = 255;
+      } else {
+        colors[i].red = 0;
+        colors[i].green = 255;
+        colors[i].blue = 0;
+      }
+
+    }
+    ledStrip.write(colors, LED_COUNT, 10);
+    mybat.buttonState = digitalRead(1);
+    delay(100);
+    // pulse the eyes all the time
+    eyes();
+    heartBeat(0.5);
+    for (uint16_t i = 0; i < LED_COUNT; i++)
+      if (i % 2 != 0) {
+        //uint8_t x = time - i * 8;
+        colors[i].red = 0;
+        colors[i].green = 0;
+        colors[i].blue = 255;
+      } else {
+        colors[i].red = 0;
+        colors[i].green = 255;
+        colors[i].blue = 0;
+      }
+    ledStrip.write(colors, LED_COUNT, 5);
+    mybat.buttonState = digitalRead(1);
+    delay(100);
+  }
+} //cyber_police()
+
 void led_only() {
 
   mybat.buttonState = HIGH;
@@ -200,13 +245,13 @@ void setup() {
   Serial.println("##############################");
   Serial.println("This badge was a lot of work and a lot of fun. Hope you enjoy it!");
   Serial.println("...");
+  Serial.print("Version: ");
+  Serial.println(VERSION);
   Serial.println("Initializing...");
   pinMode(LEFT_EYE, OUTPUT);
   pinMode(RIGHT_EYE, OUTPUT);
   pinMode(HEART, OUTPUT);
-
   pinMode(BUTTON, INPUT);
-
   mybat.buttonState = LOW;
   mybat.led_pattern_cur = 1;
   Serial.println("Complete!");
@@ -214,7 +259,7 @@ void setup() {
 
 void loop() {
 
-  Serial.println("Make a selection...");
+  Serial.println("Time to make a selection...");
 
   if (mybat.buttonState == LOW) {
     switch (mybat.led_pattern_cur) {
@@ -238,7 +283,12 @@ void loop() {
         darkness();
         mybat.led_pattern_cur++;
         break;
-      case 5: 
+      case 5:
+        cyber_police();
+        darkness();
+        mybat.led_pattern_cur++;
+        break;
+      case 6:
         led_only();
         mybat.led_pattern_cur = 1; // button push takes us back to the first pattern
         break;
@@ -247,5 +297,3 @@ void loop() {
     }
   }
 }
-
-
