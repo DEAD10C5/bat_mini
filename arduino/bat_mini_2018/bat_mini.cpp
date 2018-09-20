@@ -41,5 +41,3 @@ rgb_color MyBat::hsvToRgb(uint16_t h, uint8_t s, uint8_t v)
   }
   return rgb_color(r, g, b);
 }
-
-
