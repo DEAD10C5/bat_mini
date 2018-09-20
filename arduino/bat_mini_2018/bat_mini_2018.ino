@@ -8,8 +8,8 @@
 
 
    Author : @dead10c5 @p0lr_ @mzbat @theDevilsVoice
-   Date   : September 15th, 2018
-   Version: 1.1
+   Date   : September 20th, 2018
+   Version: 1.2
 */
 #include "bat_mini.h"
 
@@ -245,13 +245,13 @@ void setup() {
   Serial.println("##############################");
   Serial.println("This badge was a lot of work and a lot of fun. Hope you enjoy it!");
   Serial.println("...");
+  Serial.print("Version: ");
+  Serial.println(VERSION);
   Serial.println("Initializing...");
   pinMode(LEFT_EYE, OUTPUT);
   pinMode(RIGHT_EYE, OUTPUT);
   pinMode(HEART, OUTPUT);
-
   pinMode(BUTTON, INPUT);
-
   mybat.buttonState = LOW;
   mybat.led_pattern_cur = 1;
   Serial.println("Complete!");
@@ -259,7 +259,7 @@ void setup() {
 
 void loop() {
 
-  Serial.println("Make a selection...");
+  Serial.println("Time to make a selection...");
 
   if (mybat.buttonState == LOW) {
     switch (mybat.led_pattern_cur) {

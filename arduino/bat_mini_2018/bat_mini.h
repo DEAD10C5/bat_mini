@@ -8,8 +8,8 @@
 
 
    Author : @p0lr_ @mzbat @theDevilsVoice @dead10c5
-   Date   : August 2, 2018
-   Version: 1.0
+   Date   : September 20th, 2018
+   Version: 1.2
 
 
                     ATMEL ATTINY84 / ARDUINO
@@ -40,7 +40,7 @@ IDE Attiny84 Physical Pin
 */
 #ifndef BAT_H
 #define BAT_H
-#define VERSION "1.0"
+#define VERSION "1.2"
 
 
 #define LEDBLINK_MS     1000  // Blink rate (in milliseconds)
@@ -54,8 +54,8 @@ IDE Attiny84 Physical Pin
 // *** pins that are unused. Try to avoid D0 (pin 5)
 // *** and D2 (pin 7) if you plan to use I2C.
 // ***
-#define RX    PB1
-#define TX    PB0
+#define RX    3
+#define TX    10
 
 /*
  *     
