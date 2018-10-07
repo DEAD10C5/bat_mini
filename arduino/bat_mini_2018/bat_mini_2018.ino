@@ -69,7 +69,7 @@ void setup_watchdog(int ii)
 // system wakes up when watchdog is timed out
 void system_sleep() 
 {
-  cbi(ADCSRA,ADEN);                    // switch Analog to Digitalconverter OFF
+  ADCSRA |= (0<<ADEN);			// switch Analog to Digitalconverter OFF
   setup_watchdog(3);                   // approximately 128 mseconds sleep
  
   set_sleep_mode(SLEEP_MODE_PWR_DOWN); // sleep mode is set here
@@ -79,7 +79,7 @@ void system_sleep()
   sleep_mode();                        // System sleeps here
 
   sleep_disable();                     // System continues execution here when watchdog timed out 
-  sbi(ADCSRA,ADEN);                    // switch Analog to Digitalconverter ON
+  ADCSRA |= (1<<ADEN);                 // switch Analog to Digitalconverter ON
 }
 
 
