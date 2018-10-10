@@ -70,7 +70,7 @@ void setup_watchdog(int ii)
 void system_sleep() 
 {
   ADCSRA |= (0<<ADEN);			// switch Analog to Digitalconverter OFF
-  setup_watchdog(3);                   // approximately 128 mseconds sleep
+  setup_watchdog(2);                   // approximately 64 mseconds sleep
  
   set_sleep_mode(SLEEP_MODE_PWR_DOWN); // sleep mode is set here
   sleep_enable();
@@ -139,6 +139,7 @@ void rainbow() {
 
   mybat.buttonState = HIGH;
   system_sleep();
+  delay(100);
 
   while (mybat.buttonState != LOW) {
 
@@ -149,6 +150,7 @@ void rainbow() {
     }
     ledStrip.write(colors, LED_COUNT, BRIGHTNESS);
     system_sleep();
+	delay(100);
 
     mybat.buttonState = digitalRead(1);
   }
@@ -159,6 +161,7 @@ void flicker() {
 
   mybat.buttonState = HIGH;
   system_sleep();
+  delay(100);
 
   while (mybat.buttonState != LOW) {
 
@@ -176,6 +179,7 @@ void flicker() {
     }
     ledStrip.write(colors, LED_COUNT, BRIGHTNESS);
     system_sleep();
+	delay(100);
 
     mybat.buttonState = digitalRead(1);
   }
@@ -186,6 +190,7 @@ void sin_wave() {
 
   mybat.buttonState = HIGH;
   system_sleep();
+  delay(100);
   float tcount = 0.0;
   int ibright = 0;
   int ihue = random(0, 255);
@@ -205,10 +210,12 @@ void sin_wave() {
       colors[i] = mybat.hsvToRgb(ihue, 255, 255);
       ledStrip.write(colors, LED_COUNT, ibright);
       system_sleep();
+	  delay(100);
     }
 
     ledStrip.write(colors, LED_COUNT, 10);
     system_sleep();
+	delay(100);
     mybat.buttonState = digitalRead(1);
   }
 } // sin_wave()
@@ -217,6 +224,7 @@ void color_pop() {
 
   mybat.buttonState = HIGH;
   system_sleep();
+  delay(100);
 
   int idex = random(0, LED_COUNT);
   int ihue = random(0, 255);
@@ -228,6 +236,7 @@ void color_pop() {
     colors[idex] = mybat.hsvToRgb(ihue, 255, 255);
     ledStrip.write(colors, LED_COUNT, BRIGHTNESS);
     system_sleep();
+	delay(100);
     idex = random(0, LED_COUNT);
     ihue = random(0, 255);
     mybat.buttonState = digitalRead(1);
@@ -238,6 +247,7 @@ void cyber_police() {
 
   mybat.buttonState = HIGH;
   system_sleep();
+  delay(100);
   while (mybat.buttonState != LOW) {
     // pulse the eyes all the time
     eyes();
@@ -259,6 +269,7 @@ void cyber_police() {
     ledStrip.write(colors, LED_COUNT, 10);
     mybat.buttonState = digitalRead(1);
     system_sleep();
+	delay(100);
     // pulse the eyes all the time
     eyes();
     heartBeat(0.5);
@@ -276,6 +287,7 @@ void cyber_police() {
     ledStrip.write(colors, LED_COUNT, 5);
     mybat.buttonState = digitalRead(1);
     system_sleep();
+	delay(100);
   }
 } //cyber_police()
 
@@ -283,12 +295,14 @@ void led_only() {
 
   mybat.buttonState = HIGH;
   system_sleep();
+  delay(100);
 
   while (mybat.buttonState != LOW) {
     // pulse the eyes all the time
     eyes();
     heartBeat(0.5);
     system_sleep();
+	delay(100);
     mybat.buttonState = digitalRead(1);
   }
 
