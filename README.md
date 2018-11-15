@@ -1,7 +1,10 @@
 # Bat Badge 2018  
 
 [![Build Status](https://travis-ci.org/DEAD10C5/bat_mini.svg?branch=master)](https://travis-ci.org/DEAD10C5/bat_mini)
-
+<a href="https://scan.coverity.com/projects/dead10c5-bat_mini">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/17237/badge.svg"/>
+</a>
 
 
 ## Serial
