@@ -2,8 +2,6 @@
 
 [![Build Status](https://travis-ci.org/DEAD10C5/bat_mini.svg?branch=master)](https://travis-ci.org/DEAD10C5/bat_mini)
 
-
-
 ## Serial
 
 You can make a serial connection to the badge using a USB to TTL serial cable. 

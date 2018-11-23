@@ -8,8 +8,21 @@ git:
   depth: false
   quiet: true
 env:
-  - BD="attiny:avr:ATtinyX4:cpu=attiny84,clock=internal1"
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "RTsg0KS5w3AD+jjmXxSzyWOPzGY+wWaI6hXee34ChKiZ6lAzcRyc4XJFe1BrmcMvlEj87vGLmpZtcWnbqSS+TzJ7XeG9tuh3vQthNl9lrC1WJ4Tmc+wofrWwGwLlwGgD+TCYjAHTyifJ6H8jLB9yARCMnJVK4EY7sCUaIxGKCnJt5B21as3nlNovDd92cQ1CPNFELLgbtXFFdom+jiPmChlmzaEGRfRo4/Ytjij/IIuTBRiEP7laKgCmiSuawn5C032VRWYb5oSnXC6tyJatjOBHgDzdFXNumkhgaI937mmshGjBlyft56BtGloqRODnVoO7Nje2ZeqQTmEv6AryRXK4dRPBQaYkGGJJvqXs636MP7QFNGTYE5OtZ8Tn8X0LevskYLMRqb1wk0hagPs+jhzuZJQ8SdJL+nHaeoxgPoUBF1FJFg2z1QN52binYT4lWizmn0oJ3/DZjkNeEHfCQfMptEveKzznTM9Mko1bpzAQA1CwKkqxq6xs/EDuE5w0S0a7bb3S45nt0fb9lmcXd9gMQJyLwUPj477wsuEtleWoXc00MKwGodecz7oEmxUm/9NbLTRy8ULKNkjnw2ScgWZNCpJSRWUu6+6Hm8IUq4I0YVL6rpGNDd54BizdOk26ORls3Agb/hv4yG/iq7VIYytD8FDXr7nUSsDZM7TrfPA="
+   - BD="attiny:avr:ATtinyX4:cpu=attiny84,clock=internal1"
+ #addons:
+#  coverity_scan:
+#   project:
+#     name: "DEAD10C5/bat_mini"
+#     description: "Bat Mini badge Defcon 26/GrrCON 2018/DerbyCon VIII EVOLUTION"
+    #build_command_prepend: "<Your build preprocessing command here>"
+#   build_command: "/bin/bash build.sh"
+#   branch_pattern: coverity_scan
 before_install:
+ #  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
   - sleep 3
   - export DISPLAY=:1.0
