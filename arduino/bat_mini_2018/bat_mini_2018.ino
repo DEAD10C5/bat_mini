@@ -1,5 +1,5 @@
 /*!
-   @file hardware_test.ino
+   @file bat_mini_2018.ino
     ____  _____      _    ____    _  ___     ____ ____
    |  _ \| ____|_   / \  |  _ \ _/ |/ _ \ _ / ___| ___|
    | | | |  _| (_) / _ \ | | | (_) | | | (_) |   |___ \
@@ -7,11 +7,15 @@
    |____/|_____(_)_/   \_\____/(_)_|\___/(_)\____|____/
 
 
-   Author : @dead10c5 @p0lr_ @mzbat @theDevilsVoice
+   Author : @dead10c5 @theDevilsVoice @zenrandom 
    Date   : September 20th, 2018
-   Version: 1.2
+   Version: 1.3
 */
 #include "bat_mini.h"
+#include <avr/sleep.h>
+#include <avr/wdt.h>
+#include <avr/interrupt.h>
+
 
 SoftwareSerial Serial(RX, TX);
 
@@ -26,6 +30,49 @@ long heartBeatArray[] = {
 };
 int hbeatIndex = 1;   // this initialization is important or it starts on the "wrong foot"
 long prevMillis;
+
+// Variables for the Sleep/power down modes:
+volatile boolean f_wdt = 1;
+
+/*
+Code for enabling CPU sleep to attempt to increase battery life 
+*/
+void setup_watchdog(int ii) 
+{
+  // 0=16ms, 1=32ms,2=64ms,3=128ms,4=250ms,5=500ms
+  // 6=1 sec,7=2 sec, 8=4 sec, 9= 8sec
+
+  uint8_t bb;
+  if (ii > 9 ) ii=9;
+  bb=ii & 7;
+  if (ii > 7) bb|= (1<<5);
+  bb|= (1<<WDCE);
+
+  MCUSR &= ~(1<<WDRF);
+  // start timed sequence
+  WDTCSR |= (1<<WDCE) | (1<<WDE);
+  // set new watchdog timeout value
+  WDTCSR = bb;
+  WDTCSR |= _BV(WDIE);
+}
+
+
+// system wakes up when watchdog is timed out
+void system_sleep() 
+{
+  ADCSRA |= (0<<ADEN);      // switch Analog to Digitalconverter OFF
+  
+ 
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN); // sleep mode is set here
+  sleep_enable();
+  sei();                               // Enable the Interrupts so the wdt can wake us up
+
+  sleep_mode();                        // System sleeps here
+
+  sleep_disable();                     // System continues execution here when watchdog timed out 
+  ADCSRA |= (1<<ADEN);                 // switch Analog to Digitalconverter ON
+}
+
 
 /*
    (pin, intensity 0 (off) to 255 (max) )
@@ -51,7 +98,7 @@ void heartBeat(float tempo) {
       digitalWrite(HEART, HIGH);
       delay((int)heartBeatArray[hbeatIndex]) ;
       digitalWrite(HEART, LOW);
-      delay(150);
+      delay(75);
       digitalWrite(HEART, HIGH);
       delay((int)heartBeatArray[hbeatIndex]) ;
       digitalWrite(HEART, LOW);
@@ -82,6 +129,7 @@ void darkness() {
 void rainbow() {
 
   mybat.buttonState = HIGH;
+  system_sleep();
   delay(100);
 
   while (mybat.buttonState != LOW) {
@@ -92,7 +140,8 @@ void rainbow() {
       colors[i] = mybat.hsvToRgb((uint32_t)p * 359 / 256, 255, 255);
     }
     ledStrip.write(colors, LED_COUNT, BRIGHTNESS);
-    delay(100);
+    system_sleep();
+  delay(100);
 
     mybat.buttonState = digitalRead(1);
   }
@@ -102,6 +151,7 @@ void rainbow() {
 void flicker() {
 
   mybat.buttonState = HIGH;
+  system_sleep();
   delay(100);
 
   while (mybat.buttonState != LOW) {
@@ -119,6 +169,8 @@ void flicker() {
       colors[i] = mybat.hsvToRgb((uint32_t)p * 359 / 256, 255, 255);
     }
     ledStrip.write(colors, LED_COUNT, BRIGHTNESS);
+    system_sleep();
+    heartBeat(4.0);
     delay(100);
 
     mybat.buttonState = digitalRead(1);
@@ -129,6 +181,7 @@ void flicker() {
 void sin_wave() {
 
   mybat.buttonState = HIGH;
+  system_sleep();
   delay(100);
   float tcount = 0.0;
   int ibright = 0;
@@ -148,11 +201,13 @@ void sin_wave() {
       ibright = int(sin(tcount) * 255);
       colors[i] = mybat.hsvToRgb(ihue, 255, 255);
       ledStrip.write(colors, LED_COUNT, ibright);
-      delay(100);
+      system_sleep();
+    delay(100);
     }
 
     ledStrip.write(colors, LED_COUNT, 10);
-    delay(100);
+    system_sleep();
+  delay(100);
     mybat.buttonState = digitalRead(1);
   }
 } // sin_wave()
@@ -160,6 +215,7 @@ void sin_wave() {
 void color_pop() {
 
   mybat.buttonState = HIGH;
+  system_sleep();
   delay(100);
 
   int idex = random(0, LED_COUNT);
@@ -171,7 +227,8 @@ void color_pop() {
     heartBeat(0.5);
     colors[idex] = mybat.hsvToRgb(ihue, 255, 255);
     ledStrip.write(colors, LED_COUNT, BRIGHTNESS);
-    delay(100);
+    system_sleep();
+  delay(100);
     idex = random(0, LED_COUNT);
     ihue = random(0, 255);
     mybat.buttonState = digitalRead(1);
@@ -181,6 +238,7 @@ void color_pop() {
 void cyber_police() {
 
   mybat.buttonState = HIGH;
+  system_sleep();
   delay(100);
   while (mybat.buttonState != LOW) {
     // pulse the eyes all the time
@@ -202,7 +260,8 @@ void cyber_police() {
     }
     ledStrip.write(colors, LED_COUNT, 10);
     mybat.buttonState = digitalRead(1);
-    delay(100);
+    system_sleep();
+  delay(100);
     // pulse the eyes all the time
     eyes();
     heartBeat(0.5);
@@ -219,26 +278,30 @@ void cyber_police() {
       }
     ledStrip.write(colors, LED_COUNT, 5);
     mybat.buttonState = digitalRead(1);
-    delay(100);
+    system_sleep();
+  delay(100);
   }
 } //cyber_police()
 
 void led_only() {
 
   mybat.buttonState = HIGH;
+  system_sleep();
   delay(100);
 
   while (mybat.buttonState != LOW) {
     // pulse the eyes all the time
     eyes();
     heartBeat(0.5);
-    delay(100);
+    system_sleep();
+  delay(100);
     mybat.buttonState = digitalRead(1);
   }
 
 } //led_only()
 
 void setup() {
+  
   Serial.begin(9600);
   Serial.println("##############################");
   Serial.println("# DE:AD:10:C5 Bat Badge 2018 #");
@@ -254,6 +317,7 @@ void setup() {
   pinMode(BUTTON, INPUT);
   mybat.buttonState = LOW;
   mybat.led_pattern_cur = 1;
+  setup_watchdog(2);                   // approximately 64 mseconds sleep
   Serial.println("Complete!");
 }
 
@@ -296,4 +360,9 @@ void loop() {
         break;
     }
   }
+}
+
+// Watchdog Interrupt Service / is executed when watchdog timed out
+ISR(WDT_vect) {
+  f_wdt=1;  // set global flag
 }
